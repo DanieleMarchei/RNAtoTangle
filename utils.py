@@ -19,11 +19,14 @@ def pairs(dot_bracket):
             if b == op:
                 stack.append(i)
             elif b == cl:
-                j = stack.pop()
+                try:
+                    j = stack.pop()
+                except:
+                    raise Exception("Invalid Dot-Bracket.")
                 pairs.append([j+1,i+1])
     
     if len(stack1) + len(stack2) + len(stack3) != 0:
-        raise Exception("Some parentheses were not closed.")
+        raise Exception("Invalid Dot-Bracket.")
 
     return pairs
 
