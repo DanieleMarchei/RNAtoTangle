@@ -130,7 +130,7 @@ else:
     inv_str = inv_to_text(inv)
 
     if dotbracket != "":
-        st.latex(inv_str + " \in \\mathcal{B}"+ f"_{n}")
+        st.latex(inv_str + " \in \\mathcal{B}{"+ f"_{n}" + "}")
 
         components.html(html.replace("VALUE", str(inv)))
 
