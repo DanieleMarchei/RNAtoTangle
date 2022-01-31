@@ -141,13 +141,23 @@ else:
 
         components.html(html.replace("VALUE", str(inv)))
 
+        st.write("Tangle type.")
+
+        if is_I(inv):
+            st.latex("Identity")
+        elif is_T_tangle(inv):
+            st.latex("\\mathcal{T}-tangle")
+        elif is_U_tangle(inv):
+            st.latex("\\mathcal{U}-tangle")
+        elif is_H_tangle(inv):
+            st.latex("\\mathcal{H}-tangle")
 
         factors = factorize_reduce(inv)
         factors_tex = [f[0] + "_{" + f[1:] + "}" for f in factors]
 
         ltx_factors = " \circ ".join(factors_tex) 
 
-        st.write("Prime factorization of the tangle.")
+        st.write("Prime factorization.")
 
         st.latex(ltx_factors)
 
