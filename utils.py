@@ -12,6 +12,9 @@ def pairs(dot_bracket):
     stacks = [(stack1, "(", ")"),(stack2, "[", "]"),(stack3, "{", "}")]
     pairs = []
     for i,b in enumerate(dot_bracket_cleaned):
+        if b not in ["(",")","[","]","{","}"]:
+            raise Exception("The only parentheses allowed are () , [] and {}")
+
         for stack, op, cl in stacks:
             if b == op:
                 stack.append(i)
@@ -19,6 +22,9 @@ def pairs(dot_bracket):
                 j = stack.pop()
                 pairs.append([j+1,i+1])
     
+    if len(stack1) + len(stack2) + len(stack3) != 0:
+        raise Exception("Some parentheses were not closed.")
+
     return pairs
 
 def abbreviate(pairs):

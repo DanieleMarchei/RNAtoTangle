@@ -1,14 +1,3 @@
-from factorizetangle import *
-from utils import *
-import streamlit as st
-import streamlit.components.v1 as components
-import json
-
-html = '''
-<script src="https://d3js.org/d3.v5.js"></script>
-<svg id="tangle" style="margin: 0 auto; display: block;"></svg>
-<script>
-
 function is_on_top(d){
     return d.indexOf("'") === -1;
 }
@@ -20,17 +9,17 @@ function dot_to_int(d){
     return Number(2*i-1);
 }
 
-let hor_pad = 150;
-let ver_pad = 80;
+let hor_pad = 200;
+let ver_pad = 100;
 
 let inv = VALUE;
 let n = inv.length;
 let w = 1000 * n;
 let h = 1000 * n;
 const tangle = d3.select('#tangle')
-                 .attr('width', '100%')
-                 .attr('height', '100%')
-                 .style('background-color', 'white');
+                 .attr('width', w)
+                 .attr('height', h)
+                 .style('background-color', 'green');
                  //.attr("transform", "translate("+w/2+","+h/2+")");
 let vertices = [];
 for(i = 1; i <= n; i++){
@@ -108,47 +97,3 @@ for(i = 0; i < n; i++){
 
     
 }
-
-</script>'''
-
-
-
-init()
-
-st.write('''
-# RNA to Tangle
-''')
-
-dotbracket = st.text_input("Dot-Bracket String", "...(..[..{...[...)...]...(...)...]..}...",key="dotbracket")
-try:
-    inv = dot_bracket_to_tangle(dotbracket)
-except Exception as e:
-    st.write(str(e))
-else:
-
-    n = len(inv)
-    inv_str = inv_to_text(inv)
-
-    if dotbracket != "":
-        st.latex(inv_str + " \in \\mathcal{B}"+ f"_{n}")
-
-        components.html(html.replace("VALUE", str(inv)))
-
-
-        factors = factorize_reduce(inv)
-        factors_tex = [f[0] + "_{" + f[1:] + "}" for f in factors]
-
-        ltx_factors = " \circ ".join(factors_tex) 
-
-        st.latex(ltx_factors)
-
-        data = {
-            "dot-bracket" : dotbracket,
-            "tangle" : inv_str,
-            "factor-list" : factors
-
-        }
-
-        json_obj = json.dumps(data, indent = 2) 
-
-        st.download_button("Download", str(json_obj), file_name="tangle.json", mime="text/json")
