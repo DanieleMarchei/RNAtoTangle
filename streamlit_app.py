@@ -174,6 +174,7 @@ else:
         data = {
             "dot-bracket" : dotbracket,
             "tangle" : inv_str,
+            "N" : n,
             "type" : tangle_type,
             "factor-list" : factors
 
