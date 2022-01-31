@@ -1,4 +1,3 @@
-from sympy import Identity
 from factorizetangle import *
 from utils import *
 import streamlit as st
