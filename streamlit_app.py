@@ -115,6 +115,8 @@ for(i = 0; i < n; i++){
 
 init()
 
+st.set_page_config(page_title="RNA to Tangle")
+
 st.write('''
 # RNA to Tangle
 This page provides an implementation of the paper "RNA Secondary Structure Factorization in Prime Tangles" by Daniele Marchei and Emanuela Merelli.
