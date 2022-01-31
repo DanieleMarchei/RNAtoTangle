@@ -1,3 +1,4 @@
+from sympy import Identity
 from factorizetangle import *
 from utils import *
 import streamlit as st
@@ -143,14 +144,24 @@ else:
 
         st.write("Tangle type.")
 
+        tangle_type = ""
+
         if is_I(inv):
             st.latex("Identity")
+            tangle_type = "Identity"
+
         elif is_T_tangle(inv):
             st.latex("\\mathcal{T}-tangle")
+            tangle_type = "T-tangle"
+
         elif is_U_tangle(inv):
             st.latex("\\mathcal{U}-tangle")
+            tangle_type = "U-tangle"
+
         elif is_H_tangle(inv):
             st.latex("\\mathcal{H}-tangle")
+            tangle_type = "H-tangle"
+
 
         factors = factorize_reduce(inv)
         factors_tex = [f[0] + "_{" + f[1:] + "}" for f in factors]
@@ -164,6 +175,7 @@ else:
         data = {
             "dot-bracket" : dotbracket,
             "tangle" : inv_str,
+            "type" : tangle_type,
             "factor-list" : factors
 
         }
