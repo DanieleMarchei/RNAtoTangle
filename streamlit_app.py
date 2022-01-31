@@ -117,7 +117,7 @@ init()
 
 st.write('''
 # RNA to Tangle
-This page provides an implementation of the paper "RNA Secondary Structure Factorization in PrimeTangles" by Daniele Marchei and Emanuela Merelli.
+This page provides an implementation of the paper "RNA Secondary Structure Factorization in Prime Tangles" by Daniele Marchei and Emanuela Merelli.
 
 Insert your RNA secondary structure in Dot-Bracket notation and press Enter to get its corresponding tangle and relative prime factorization. Please keep in mind that long inputs may take some time to compute.
 ''')
