@@ -117,6 +117,9 @@ init()
 
 st.write('''
 # RNA to Tangle
+This page provides an implementation of the paper "RNA Secondary Structure Factorization in PrimeTangles`` by Daniele Marchei and Emanuela Merelli.
+
+Insert your RNA secondary structure in Dot-Bracket notation and press Enter to get its corresponding tangle and relative prime factorization.
 ''')
 
 dotbracket = st.text_input("Dot-Bracket String", "...(..[..{...[...)...]...(...)...]..}...",key="dotbracket")
@@ -130,7 +133,11 @@ else:
     inv_str = inv_to_text(inv)
 
     if dotbracket != "":
+        st.write("The tangle in text form.")
+
         st.latex(inv_str + " \in \\mathcal{B}"+ "_{"+str(n)+"}")
+
+        st.write("The tangle diagrammatically.")
 
         components.html(html.replace("VALUE", str(inv)))
 
@@ -139,6 +146,8 @@ else:
         factors_tex = [f[0] + "_{" + f[1:] + "}" for f in factors]
 
         ltx_factors = " \circ ".join(factors_tex) 
+
+        st.write("Prime factorization of the tangle.")
 
         st.latex(ltx_factors)
 
