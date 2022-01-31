@@ -1,8 +1,8 @@
-from sympy import latex
 from factorizetangle import *
 from utils import *
 import streamlit as st
 import streamlit.components.v1 as components
+import json
 
 html = '''
 <script src="https://d3js.org/d3.v5.js"></script>
@@ -119,7 +119,7 @@ st.write('''
 # RNA to Tangle
 ''')
 
-dotbracket = st.text_input("Dot-Bracket String")
+dotbracket = st.text_input("Dot-Bracket String", "...(..[..{...[...)...]...(...)...]..}...")
 
 inv = dot_bracket_to_tangle(dotbracket)
 
@@ -133,7 +133,19 @@ if dotbracket != "":
 
 
     factors = factorize_reduce(inv)
+    factors_tex = [f[0] + "_{" + f[1:] + "}" for f in factors]
 
-    ltx_factors = " \circ ".join(factors) 
+    ltx_factors = " \circ ".join(factors_tex) 
 
     st.latex(ltx_factors)
+
+    data = {
+        "dot-bracket" : dotbracket,
+        "tangle" : inv_str,
+        "factor-list" : factors
+
+    }
+
+    json_obj = json.dumps(data, indent = 2) 
+
+    st.download_button("Download", str(json_obj), file_name="tangle.json", mime="text/json")
